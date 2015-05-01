@@ -3,9 +3,41 @@ var User = {
   //schema: true,
 
   attributes: { 
-    username  : { type: 'string', unique: true },
-    email     : { type: 'email',  unique: true },
-    passports : { collection: 'Passport', via: 'user' }
+    
+    username: { 
+     type: 'string', 
+     unique: true 
+    },
+    
+    email: { 
+      type: 'email',  
+      unique: true 
+    },
+    
+    passports: { 
+      collection: 'Passport', 
+      via: 'user' 
+    },
+    
+    isDeveloperIn: {
+      collection: 'Project',
+      via: 'developers'
+    },
+    
+    projects: {
+      collection: 'Project',
+      via: 'creator'
+    },
+    
+    createdBugs: {
+      collection: 'Bug',
+      via: 'creator'
+    },
+    
+    assignedBugs: {
+      collection: 'Bug',
+      via: 'assignedTo'
+    }
   }
 };
 

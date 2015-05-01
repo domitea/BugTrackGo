@@ -14,18 +14,18 @@ module.exports = {
       required: true
     },
     
-    creator: {
-      model: 'user',
+   creator: {
+      model: 'User',
       required: true
     },
     
     // Bug can be assinged to developer who is developer of project..,
     assignedTo: {
-      model: 'user'
+      model: 'User'
     },
     
     belongsTo: {
-      model: 'project',
+      model: 'Project',
       required: true
     },
     

@@ -18,7 +18,7 @@ module.exports = {
     
     // Creator of project
     creator: {
-      model: 'user',
+      model: 'User',
       required: true
     },
     
@@ -42,16 +42,16 @@ module.exports = {
     },
          
     // Many-to-Many relationship for Developer roles of project... Developers can report bug and comments bugs
-    develepers: {
-      collection: 'user',
+    developers: {
+      collection: 'User',
       via: 'isDeveloperIn',
       dominant: true
     },
     
     // One-to-Many realtionship for Bugs in project  
     bugs: {
-      collection: 'bug',
-      via: 'belongsTo',
+      collection: 'Bug',
+      via: 'belongsTo'
     },
   }
 };
