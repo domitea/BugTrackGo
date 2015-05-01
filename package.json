@@ -2,7 +2,7 @@
   "name": "BugTrackGo",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Bug Tracker web app using Sails.js",
   "keywords": [],
   "dependencies": {
     "bcryptjs": "^2.1.0",
