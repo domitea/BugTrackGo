@@ -8,7 +8,37 @@
 module.exports = {
 
   attributes: {
+    
+    name: {
+      type: 'string',
+      required: true
+    },
+    
+    creator: {
+      model: 'user',
+      required: true
+    },
+    
+    // Bug can be assinged to developer who is developer of project..,
+    assignedTo: {
+      model: 'user'
+    },
+    
+    belongsTo: {
+      model: 'project',
+      required: true
+    },
+    
+    description: {
+      type: 'string',
+      required: true
+    },
 
+    priority: {
+      type: 'string',
+      enum: ['none', 'low', 'normal', 'high'],
+      defaultsTo: 'normal'
+    },
   }
 };
 
