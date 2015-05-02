@@ -7,5 +7,23 @@
 
 module.exports = {
 	
+	new: function (req, res) {
+		res.view();
+	},
+	
+	detail: function (req, res) {
+				
+		res.view();
+	},
+	
+	list: function (req, res) {
+				
+		res.view();
+	},
+	
+	edit: function (req, res) {
+				
+		res.view();
+	}
 };
 
