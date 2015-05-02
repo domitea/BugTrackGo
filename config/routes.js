@@ -60,5 +60,9 @@ module.exports.routes = {
   
   
   'get /home':'UserController.home',
-
+  
+  'get /project/new':'ProjectController.new',
+  'get /project/detail/:id':'ProjectController.detail',
+  'get /project/list':'ProjectController.list',
+  'get /project/edit/id':'ProjectController.edit'
 };
