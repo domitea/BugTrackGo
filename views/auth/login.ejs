@@ -1,19 +1,58 @@
 <% if (errors) {%>
   <% errors.forEach(function (error) { %>
-    <%= __(error) %>
+    <div data-alert class="alert alert-dismissable alert-danger">
+        <%= __(error) %>
+    </div>
   <% }) %>
 <% } %>
 
-<form role="form" action="/auth/local" method="post">
-  <input type="text" name="identifier" placeholder="Username or Email">
-  <input type="password" name="password" placeholder="Password">
-  <button type="submit">Sign in</button>
+
+
+<style>
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+
+
+<form class="form-signin" action="/auth/local" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address or Username</label>
+        <input type="text" name="identifier" class="form-control" placeholder="Email address or Username" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" required="">
+   <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
 
-<% if (providers.length) {%>
-  <h4>You can also use one of these...</h4>
-
-  <% Object.keys(providers).forEach(function (key) { %>
-    <a href="/auth/<%= providers[key].slug %>" role="button"><%= providers[key].name %></a>
-  <% }) %>
-<% } %>

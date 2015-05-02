@@ -8,6 +8,11 @@ var User = {
 
   attributes: { 
     
+    id: {
+      type: 'string',
+      primaryKey: true
+    },
+    
     username: { 
      type: 'string', 
      unique: true 

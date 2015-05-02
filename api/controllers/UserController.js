@@ -7,6 +7,6 @@
 
 module.exports = {
 	home: function (req, res) {
-		res.view({userProfile: req.session.passport.user});
+		res.view();
 	}
 };
