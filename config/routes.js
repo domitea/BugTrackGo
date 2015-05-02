@@ -64,5 +64,5 @@ module.exports.routes = {
   'get /project/new':'ProjectController.new',
   'get /project/detail/:id':'ProjectController.detail',
   'get /project/list':'ProjectController.list',
-  'get /project/edit/id':'ProjectController.edit'
+  'get /project/edit/:id':'ProjectController.edit'
 };
