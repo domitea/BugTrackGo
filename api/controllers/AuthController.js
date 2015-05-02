@@ -137,8 +137,6 @@ var AuthController = {
         req.flash('error', flashError);
       }
       req.flash('form', req.body);
-      console.log(err);
-      console.log(flashError);
       // If an error was thrown, redirect the user to the
       // login, register or disconnect action initiator view.
       // These views should take care of rendering the error messages.
@@ -166,12 +164,13 @@ var AuthController = {
           return tryAgain(err);
         }
         
+      });
         // Mark the session as authenticated to work with default Sails sessionAuth.js policy
-        req.session.authenticated = true
+        req.session.authenticated = true;
         
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
-        res.redirect('/');
+        res.redirect('/home');
       });
     });
   },

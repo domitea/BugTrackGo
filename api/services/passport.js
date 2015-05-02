@@ -167,7 +167,7 @@ passport.connect = function (req, query, profile, next) {
           if (err) {
             return next(err);
           }
-
+          
           next(err, req.user);
         });
       }

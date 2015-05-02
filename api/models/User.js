@@ -2,6 +2,10 @@ var User = {
   // Enforce model schema in the case of schemaless databases
   //schema: true,
 
+  beforeCreate: function(values, next) {
+    next();
+  },
+
   attributes: { 
     
     username: { 
