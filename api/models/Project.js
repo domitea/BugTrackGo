@@ -13,7 +13,7 @@ module.exports = {
     // Name of project
     name: {
       type: 'string',
-      required: true
+      required: true      
     },
     
     // Creator of project

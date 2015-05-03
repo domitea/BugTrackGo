@@ -11,19 +11,22 @@ module.exports = {
 		res.view();
 	},
 	
-	detail: function (req, res) {
-				
+	detail: function (req, res) {		
 		res.view();
 	},
 	
-	list: function (req, res) {
-				
+	list: function (req, res) {	
+		sails.log("No way");
 		res.view();
 	},
 	
-	edit: function (req, res) {
-				
+	edit: function (req, res) {		
 		res.view();
+	},
+	
+	newProject: function(req, res) {
+		sails.log(JSON.stringify(req.param("name")));
+		res.redirect('/home');
 	}
 };
 
