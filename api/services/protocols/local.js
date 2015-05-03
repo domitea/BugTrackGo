@@ -42,7 +42,7 @@ exports.register = function (req, res, next) {
     req.flash('error', 'Error.Passport.Password.Missing');
     return next(new Error('No password was entered.'));
   }
-
+  
   User.create({
     username : username
   , email    : email
@@ -61,7 +61,7 @@ exports.register = function (req, res, next) {
 
     // Generating accessToken for API authentication
     var token = crypto.randomBytes(48).toString('base64');
-
+    
     Passport.create({
       protocol    : 'local'
     , password    : password
@@ -69,6 +69,7 @@ exports.register = function (req, res, next) {
     , accessToken : token
     }, function (err, passport) {
       if (err) {
+        
         if (err.code === 'E_VALIDATION') {
           req.flash('error', 'Error.Passport.Password.Invalid');
         }
@@ -77,7 +78,8 @@ exports.register = function (req, res, next) {
           next(destroyErr || err);
         });
       }
-
+      
+      
       next(null, user);
     });
   });
@@ -97,7 +99,7 @@ exports.register = function (req, res, next) {
 exports.connect = function (req, res, next) {
   var user     = req.user
     , password = req.param('password');
-
+  
   Passport.findOne({
     protocol : 'local'
   , user     : user.id

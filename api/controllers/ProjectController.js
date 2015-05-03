@@ -16,8 +16,31 @@ module.exports = {
 	},
 	
 	list: function (req, res) {	
-		sails.log("No way");
-		res.view();
+		var userId = res.locals.user.id;
+		
+		var creatorsProjects;
+		var publicProjects;
+		var otherProjects;
+		
+		// Find all projects where creator is logged user
+		Project.find({creator: userId}).exec(function (err, found){
+			creatorsProjects = found;
+		});
+		
+		// Find all public projects where creator is NOT logged user
+		Project.find({privacy: "public", creator: { '!': userId }}).exec(function (err, found){
+			publicProjects = found;
+		});
+		
+		if (res.locals.user.admin)
+		{
+			// Find other projects (= private) where creator is NOT logged user
+			Project.find({privacy: "private", creator: { '!': userId }}).exec(function (err, found){
+			otherProjects = found;
+		});
+		}
+		
+		res.view({my: creatorsProjects, public: publicProjects, other: otherProjects});
 	},
 	
 	edit: function (req, res) {		
@@ -41,7 +64,7 @@ module.exports = {
 			sails.log("Created project" + created.name);
 		});
 		
-		res.redirect('/home');
+		res.redirect('/project');
 	}
 };
 
