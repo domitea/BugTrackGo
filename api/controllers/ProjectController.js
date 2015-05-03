@@ -14,7 +14,7 @@ module.exports = {
 	},
 	
 	detail: function (req, res) {		
-		res.view();
+		res.view( {id: req.param('id')} );
 	},
 	
 	list: function (req, res) {	
@@ -39,7 +39,7 @@ module.exports = {
 
 	},
 	
-	edit: function (req, res) {		
+	edit: function (req, res) {
 		res.view();
 	},
 	
