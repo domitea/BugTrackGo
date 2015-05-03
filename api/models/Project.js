@@ -9,6 +9,10 @@ module.exports = {
 
   attributes: {
     
+    id: {
+      type: 'string',
+      primaryKey: true
+    },
     
     // Name of project
     name: {

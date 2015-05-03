@@ -25,7 +25,22 @@ module.exports = {
 	},
 	
 	newProject: function(req, res) {
-		sails.log(JSON.stringify(req.param("name")));
+		
+		var name = req.param('name');
+		var description = req.param('description');
+		var privacy = req.param('privacy');
+		var status = req.param('status');
+		var creator = res.locals.user;
+		
+		Project.create({name: name, 
+						description: description, 
+						privacy: privacy,
+						status: status,
+						creator: creator},
+		function (err,created){
+			sails.log("Created project" + created.name);
+		});
+		
 		res.redirect('/home');
 	}
 };
