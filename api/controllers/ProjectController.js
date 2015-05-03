@@ -1,3 +1,5 @@
+var Q = require('q');
+
 /**
  * ProjectController
  *
@@ -18,31 +20,23 @@ module.exports = {
 	list: function (req, res) {	
 		var userId = res.locals.user.id;
 		
-		var creatorsProjects = {};
-		var publicProjects = {};
-		var otherProjects = {};
+		var creatorsProjects = [];
+		var publicProjects = [];
+		var otherProjects = [];
 		
+		Q.all([
 		// Find all projects where creator is logged user
-		Project.find({creator: userId}).exec(function (err, found){
-			sails.log(creatorsProjects);
-			creatorsProjects = found;
-			sails.log(creatorsProjects);
-		});
-		
+		Project.find({creator: userId}).then(),
 		// Find all public projects where creator is NOT logged user
-		Project.find({privacy: "public", creator: { '!': userId }}).exec(function (err, found){
-			publicProjects = found;
+		Project.find({privacy: "public", creator: { '!': userId }}).then(),
+		// Find other projects (= private) where creator is NOT logged user
+		Project.find({privacy: "private", creator: { '!': userId }}).then()
+		]).spread(function (my, public, other) {
+			res.view({my: my, public: public , other: other});
+		}).fail(function (why) {
+			res.serverError(why);
 		});
-		
-		if (res.locals.user.admin)
-		{
-			// Find other projects (= private) where creator is NOT logged user
-			Project.find({privacy: "private", creator: { '!': userId }}).exec(function (err, found){
-			otherProjects = found;
-		});
-		}
 
-		res.view({my: creatorsProjects, public: publicProjects, other: otherProjects});
 	},
 	
 	edit: function (req, res) {		
@@ -66,7 +60,7 @@ module.exports = {
 			sails.log("Created project" + created.name);
 		});
 		
-		res.redirect('/project');
+		res.redirect('/project/');
 	}
 };
 
