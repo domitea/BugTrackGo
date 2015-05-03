@@ -26,10 +26,44 @@
     </nav>
 
 <div class="container-fluid">
-  <div class="panel panel-primary">
-    <div class="panel-heading">My projects</div>
-      <div class="panel-body">
-           <% %>
-      </div>
-    </div>
+	 <% if (typeof my !== 'undefined') { %>
+  		<div class="panel panel-primary">
+    		<div class="panel-heading">My projects</div>
+      		<div class="panel-body">
+          		<table class="table">
+
+			 		</table>
+      		</div>
+    	</div>
+	<% } else { %>
+		<div class="alert alert-warning" role="alert">You don't created any projects</div>
+	<% } %>
+	<hr />
+	<% if (typeof public !== 'undefined') { %>
+  		<div class="panel panel-primary">
+    		<div class="panel-heading">Projects where you are a developer</div>
+      		<div class="panel-body">
+          		<table class="table">
+
+			 		</table>
+      		</div>
+    	</div>
+	<% } else { %>
+		<div class="alert alert-warning" role="alert">You are not a developer in any projects</div>
+	<% } %>
+	<hr />
+	<% if (user.admin) { %>
+		<% if (typeof other !== 'undefined') { %>
+			<div class="panel panel-primary">
+				<div class="panel-heading">Other projects</div>
+					<div class="panel-body">
+						<table class="table">
+
+						</table>
+					</div>
+			</div>
+		<% } else { %>
+			<div class="alert alert-warning" role="alert">There are not other projects</div>
+		<% } %>
+	<% } %>
 </div>

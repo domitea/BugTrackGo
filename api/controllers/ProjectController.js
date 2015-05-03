@@ -18,13 +18,15 @@ module.exports = {
 	list: function (req, res) {	
 		var userId = res.locals.user.id;
 		
-		var creatorsProjects;
-		var publicProjects;
-		var otherProjects;
+		var creatorsProjects = {};
+		var publicProjects = {};
+		var otherProjects = {};
 		
 		// Find all projects where creator is logged user
 		Project.find({creator: userId}).exec(function (err, found){
+			sails.log(creatorsProjects);
 			creatorsProjects = found;
+			sails.log(creatorsProjects);
 		});
 		
 		// Find all public projects where creator is NOT logged user
@@ -39,7 +41,7 @@ module.exports = {
 			otherProjects = found;
 		});
 		}
-		
+
 		res.view({my: creatorsProjects, public: publicProjects, other: otherProjects});
 	},
 	

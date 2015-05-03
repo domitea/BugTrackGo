@@ -3,11 +3,11 @@
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
 body{margin:0}
 body {
-    padding-top: 60px;
+    padding-top: 70px;
   }
   @media (max-width: 980px) {
     body {
-      padding-top: 60px;
+      padding-top: 70px;
     }
   }
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary{display:block}
