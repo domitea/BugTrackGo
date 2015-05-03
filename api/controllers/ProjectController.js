@@ -19,11 +19,7 @@ module.exports = {
 	
 	list: function (req, res) {	
 		var userId = res.locals.user.id;
-		
-		var creatorsProjects = [];
-		var publicProjects = [];
-		var otherProjects = [];
-		
+
 		Q.all([
 		// Find all projects where creator is logged user
 		Project.find({creator: userId}).then(),
