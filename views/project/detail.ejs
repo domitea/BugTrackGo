@@ -36,7 +36,7 @@
       		</div>
     	</div>
 	<% } else { %>
-		<div class="alert alert-warning" role="alert">You don't created any projects</div>
+		<div class="alert alert-info" role="alert">You don't created any projects</div>
 	<% } %>
 	<hr />
 	<% if (typeof public !== 'undefined') { %>
@@ -49,7 +49,7 @@
       		</div>
     	</div>
 	<% } else { %>
-		<div class="alert alert-warning" role="alert">You are not a developer in any projects</div>
+		<div class="alert alert-info" role="alert">You are not a developer in any projects</div>
 	<% } %>
 	<hr />
 	<% if (user.admin) { %>
@@ -63,7 +63,7 @@
 					</div>
 			</div>
 		<% } else { %>
-			<div class="alert alert-warning" role="alert">There are not other projects</div>
+			<div class="alert alert-info" role="alert">There are not other projects</div>
 		<% } %>
 	<% } %>
 </div>
