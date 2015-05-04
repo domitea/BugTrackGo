@@ -13,8 +13,15 @@ module.exports = {
 		res.view();
 	},
 	
-	detail: function (req, res) {		
-		res.view( {id: req.param('id')} );
+	detail: function (req, res) {
+		Project.findOne({id: req.param('id')}).populate('developers').populate('bugs').exec(function (err,found) {
+			if (err) {
+				next(err);
+			}
+			res.view( {project: found} );
+		});
+
+
 	},
 	
 	list: function (req, res) {	

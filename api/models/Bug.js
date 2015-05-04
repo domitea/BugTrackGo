@@ -44,6 +44,11 @@ module.exports = {
       enum: ['none', 'low', 'normal', 'high'],
       defaultsTo: 'normal'
     },
+
+	 solved: {
+		 type: 'boolean',
+		 defaultsTo: 'false'
+	 }
   }
 };
 
