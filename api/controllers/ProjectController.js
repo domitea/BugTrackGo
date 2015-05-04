@@ -18,7 +18,18 @@ module.exports = {
 			if (err) {
 				next(err);
 			}
-			res.view( {project: found} );
+
+			var project = found;
+
+			User.findOne({id: project.creator}).exec(function (err,found) {
+				if (err) {
+					next(err);
+				}
+
+				project.creator = found;
+
+				res.view({project: project});
+			});
 		});
 
 

@@ -14,9 +14,9 @@
           <ul class="nav navbar-nav">
             <li><a href="/home">Home</a></li>
             <li class="active"><a href="/project/">Projects</a></li>
-            <li><a href="/bug/list">Bugs</a></li>
+            <li><a href="/bug/">Bugs</a></li>
             <li><a href="/project/new">New project</a></li>
-            <li><a href="/bug/new">New bug</a></li>
+            <li><a href="/bug/new/undefined">New bug</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/user/manage"><b><%= user.username %></b></a></li>
@@ -24,8 +24,79 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+
+
 <div class="container-fluid">
-	<%= JSON.stringify(project) %>
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Information</b>
+		</div>
+  		<div class="panel-body">
+
+			<table class="table table-striped table-hover">
+				<tr>
+					<td><b>Name:</b></td><td><%= project.name %></td>
+					<td><b>Description:</b></td><td><%= project.description %></td>
+				</tr>
+				<tr>
+					<td><b>Privacy:</b></td>
+							<% if (project.privacy === 'public') { %>
+								<td><span class="btn btn-success disabled">Public</span></td>
+							<% } else { %>
+								<td><span class="btn btn-default disabled">Private</span></td>
+							<% } %>
+					<td><b>Status:</b></td>
+							<% if (project.status === 'developing') { %>
+								<td><span class="btn btn-danger disabled">Developing</span></td>
+							<% } else if(project.status === 'testing') { %>
+								<td><span class="btn btn-warning disabled">Testing</span></td>
+							<% } else { %>
+								<td><span class="btn btn-default disabled">Production</span></td>
+							<% } %>
+				</tr>
+
+    		<% if (!project.creator.id === user.id) { %>
+				<tr>
+					<td><b>Creator:</b></td>
+					<td><%= project.creator.username %></td>
+				</tr>
+   		<% } %>
+   	</table>
+
+		<%= JSON.stringify(project) %>
+		</div>
+
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Bugs</b>
+		</div>
+  		<div class="panel-body">
+
+			<% if (project.bugs.length > 0) { %>
+
+			<table class="table table-striped table-hover">
+
+
+				<tr>
+					<td><b>Name:</b></td><td><%= project.name %></td>
+					<td><b>Description:</b></td><td><%= project.description %></td>
+				</tr>
+
+
+   		</table>
+
+			<% } else { %>
+
+			<div class="alert alert-success" role="alert"><b>There are no bugs!</b></div>
+
+   		<% } %>
+		</div>
+  		<div class="panel-footer">
+  			<td><span class="btn btn-normal"><a href="../bug/new/<%= project.id %>">Add bug</a></span></td>
+    	</div>
+	</div>
 </div>
 
 
