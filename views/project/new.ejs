@@ -16,7 +16,7 @@
             <li><a href="/project/">Projects</a></li>
             <li><a href="/bug/">Bugs</a></li>
             <li class="active"><a href="/project/new">New project</a></li>
-            <li><a href="/bug/new">New bug</a></li>
+            <li><a href="/bug/new/undefined">New bug</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/user/manage"><b><%= user.username %></b></a></li>
@@ -26,7 +26,7 @@
     </nav>
 
 <div class="container-fluid">
-  <div class="panel panel-default">
+  <div class="panel panel-primary">
     <div class="panel-heading">New project</div>
       <div class="panel-body">
         <form class="form-horizontal" action="/project/" method="post">
@@ -68,6 +68,7 @@
                </select> 
              </div>         
           </div>
+			 <hr />
           <div class="form-group"> 
             <div class="col-sm-offset-2 col-sm-10">
               <button type="submit" class="btn btn-default">Submit</button>

@@ -78,6 +78,19 @@
 						</select>
              	</div>
 				</div>
+				<hr />
+				<% if (project.developers.lenght != null) { %>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="project">Assign bug to:</label>
+						<div class="col-sm-10">
+							<select name="belongsTo" class="form-control" required="">
+								<% for (var i = 0; i < project.delopers.length; i++) { %>
+									<option value="<%= project.developers[i].id %>"><%= project.developers[i].name %></option>
+								<% } %>
+							</select>
+						</div>
+					</div>
+				<% } %>
 			</form>
 		</div>
  	</div>
