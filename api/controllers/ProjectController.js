@@ -55,7 +55,15 @@ module.exports = {
 	},
 	
 	edit: function (req, res) {
+		var name = req.param('name');
+		var description = req.param('description');
+		var privacy = req.param('privacy');
+		var status = req.param('status');
+		var id = req.param('id');
 
+		Project.merge(id, {name: name, description: description, privacy: privacy, status: status}, function (err, changed) {
+		res.redirect('/project/' + changed.id);
+		});
 	},
 	
 	newProject: function(req, res) {
@@ -80,12 +88,22 @@ module.exports = {
 
 	remove: function(req, res) {
 		Project.destroy({id: req.param('id')}).populate('bugs').exec(function (err) {
+			if (err)
+			{
+				res.serverError(err);
+			}
+
 			res.redirect('/home');
 		});
 	},
 
 	editview: function (req, res) {
 		Project.findOne({id: req.param('id')}).exec(function (err, found) {
+			if (err)
+			{
+				res.serverError(err);
+			}
+
 			res.view({project: found});
 		});
 	},

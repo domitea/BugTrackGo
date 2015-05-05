@@ -60,17 +60,18 @@ module.exports.routes = {
   
   
   'get /home':'UserController.home',
-  'get /user/manage':'UserController.edit',
   
   'get /project/new' : 'ProjectController.new',
   'get /project/:id' : 'ProjectController.detail',
   'get /project/' : 'ProjectController.list',
+	'get /project/edit/:id' : 'ProjectController.editView',
   'post /project/' : 'ProjectController.newProject',
   'post /project/:id' : 'ProjectController.edit',
-	'post /project/remove/:id' : 'ProjectController.remove',
+	'get /project/remove/:id' : 'ProjectController.remove',
 
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',
+	'get /bug/' : 'BugController.list',
 	'get /bug/:id' : 'BugController.detail',
 	'post /bug/:id' : 'BugController.edit',
 	'get /bug/solved/:id' : 'BugController.solved',

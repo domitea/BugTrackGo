@@ -20,7 +20,6 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
 				 <li><a href="/logout"><b>Log Out</b></a></li>
-            <li><a href="/user/manage"><b><%= user.username %></b></a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -63,8 +62,6 @@
 				</tr>
    		<% } %>
    	</table>
-
-		<%= JSON.stringify(project) %>
 		</div>
 		<div class="panel-footer">
 			<% if (project.creator.id === user.id) { %>

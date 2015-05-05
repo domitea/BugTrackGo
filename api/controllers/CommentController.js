@@ -30,11 +30,5 @@ module.exports = {
 				res.redirect("/bug/" + bug.id);
 			});
 		});
-	},
-
-	remove: function(req, res) {
-		Comment.destroy({id: req.param('id')}).populate('bugs').exec(function (err) {
-			res.redirect('/home');
-		});
 	}
 };

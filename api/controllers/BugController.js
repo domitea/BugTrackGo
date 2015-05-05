@@ -68,6 +68,12 @@ module.exports = {
 
 	remove: function(req, res) {
 		Bug.destroy({id: req.param('id')}).exec(function (err) {
+
+			if (err)
+			{
+				res.serverError(err);
+			}
+
 			res.redirect('/home');
 		});
 	},
@@ -94,7 +100,6 @@ module.exports = {
 	},
 
 	edit: function(req, res) {
-		sails.log("ssadsa");
 
 		var name = req.param('name');
 		var description = req.param('description');
@@ -105,6 +110,16 @@ module.exports = {
 
 		Bug.merge(req.param('id'), {name: name, description: description, priority: priority, assignedTo: assignedTo}, function (err, changed) {
 			res.redirect('/bug/' + changed.id);
+		});
+	},
+
+	list: function(req, res) {
+		Q.all([
+			Bug.find({creator: res.locals.user.id}).then()
+		]).spread(function (myBugs) {
+			res.view({bugs: myBugs})
+		}).fail(function (why) {
+			res.serverError(why);
 		});
 	},
 };
