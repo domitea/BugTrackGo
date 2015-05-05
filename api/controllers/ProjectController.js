@@ -82,6 +82,12 @@ module.exports = {
 		Project.destroy({id: req.param('id')}).populate('bugs').exec(function (err) {
 			res.redirect('/home');
 		});
-	}
+	},
+
+	editview: function (req, res) {
+		Project.findOne({id: req.param('id')}).exec(function (err, found) {
+			res.view({project: found});
+		});
+	},
 };
 

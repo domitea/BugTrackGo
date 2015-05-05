@@ -1,0 +1,81 @@
+<!-- Header -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bug Track Go</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">Home</a></li>
+            <li class="active"><a href="/project/">Projects</a></li>
+            <li><a href="/bug/">Bugs</a></li>
+            <li><a href="/project/new">New project</a></li>
+            <li><a href="/bug/new/undefined">New bug</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+				 <li><a href="/logout"><b>Log Out</b></a></li>
+            <li><a href="/user/manage"><b><%= user.username %></b></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div class="container-fluid">
+  <div class="panel panel-primary">
+    <div class="panel-heading">New project</div>
+      <div class="panel-body">
+        <form class="form-horizontal" action="/project/<%= project.id %>" method="post">
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Name of Project:</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" required="" name="name" placeholder="Enter name of project">
+            </div>
+          </div>
+          <hr/>
+          <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Description of Project:</label>
+            <div class="col-sm-10">
+              <textarea rows="10" class="form-control" name="description" placeholder="Description about project..." required=""></textarea>
+            </div>
+          </div>
+          <hr/>
+          <div class="form-group">
+             <label class="control-label col-sm-2" for="privacy">Privacy of Project:</label>
+            <div class="col-sm-10">
+              <label class="radio">
+                <input type="radio" name="privacy" value="public" checked="true">
+                This project is <b>Public</b> and visible for all registered developers
+              </label>
+              <label class="radio">
+                <input type="radio" name="privacy" value="private">
+                This project is <b>Private</b> and visible for developers who are invited
+              </label>
+            </div>
+          </div>
+          <hr/>
+          <div class="form-group">
+             <label class="control-label col-sm-2" for="status">Status of Project:</label>
+             <div class="col-sm-10">
+               <select name="status" class="form-control" required="">
+                  <option value="developing">Developing</option>
+                  <option value="testing">Testing</option>
+                  <option value="production">Production</option>
+               </select>
+             </div>
+          </div>
+			 <hr />
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+   </div>
