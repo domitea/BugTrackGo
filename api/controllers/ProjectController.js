@@ -14,7 +14,7 @@ module.exports = {
 	},
 	
 	detail: function (req, res) {
-		Project.findOne({id: req.param('id')}).exec(function (err,found) {
+		Project.findOne({id: req.param('id')}).populate('developers').exec(function (err,found) {
 			if (err) {
 				next(err);
 			}
@@ -55,7 +55,7 @@ module.exports = {
 	},
 	
 	edit: function (req, res) {
-		res.view();
+
 	},
 	
 	newProject: function(req, res) {

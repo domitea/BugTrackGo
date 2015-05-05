@@ -66,7 +66,7 @@ module.exports.routes = {
   'get /project/:id' : 'ProjectController.detail',
   'get /project/' : 'ProjectController.list',
   'post /project/' : 'ProjectController.newProject',
-  'patch /project/:id' : 'ProjectController.edit',
+  'post /project/:id' : 'ProjectController.edit',
 
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',

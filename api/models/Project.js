@@ -44,14 +44,7 @@ module.exports = {
       enum: ['developing', 'testing', 'production'],
       required: true
     },
-         
-    // Many-to-Many relationship for Developer roles of project... Developers can report bug and comments bugs
-    developers: {
-      collection: 'User',
-      via: 'isDeveloperIn',
-      dominant: true
-    },
-    
+
     // One-to-Many realtionship for Bugs in project  
     bugs: {
       collection: 'Bug',

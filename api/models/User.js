@@ -31,12 +31,7 @@ var User = {
     admin: {
       type: 'boolean'
     },
-    
-    isDeveloperIn: {
-      collection: 'Project',
-      via: 'developers'
-    },
-    
+
     projects: {
       collection: 'Project',
       via: 'creator'
