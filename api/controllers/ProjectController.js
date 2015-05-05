@@ -14,24 +14,25 @@ module.exports = {
 	},
 	
 	detail: function (req, res) {
-		Project.findOne({id: req.param('id')}).populate('developers').populate('bugs').exec(function (err,found) {
+		Project.findOne({id: req.param('id')}).exec(function (err,found) {
 			if (err) {
 				next(err);
 			}
+			project = found;
 
-			var project = found;
+			Q.all([
+				User.findOne({id: project.creator}).then(),
+				Bug.find({belongsTo: project.id}).then(),
+			]).spread(function (user, bugs) {
 
-			User.findOne({id: project.creator}).exec(function (err,found) {
-				if (err) {
-					next(err);
-				}
-
-				project.creator = found;
+				project.creator = user;
+				project.bugs = bugs;
 
 				res.view({project: project});
+			}).fail(function (why) {
+				res.serverError(why)
 			});
 		});
-
 
 	},
 	

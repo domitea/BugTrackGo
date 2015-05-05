@@ -26,6 +26,45 @@ module.exports = {
 				res.view({my: null, public: null, project: found});
 			});
 		}
+	},
+
+	newBug: function (req, res) {
+		var name = req.param('name');
+		var description = req.param('description');
+		var belongsTo = req.param('belongsTo');
+		var priority = req.param('priority');
+		var assignedTo = req.param('assignedTo');
+		var creator = res.locals.user;
+
+		Project.findOne({id: belongsTo}).exec(function (err, project) {
+			if (err) {
+				sails.log(err);
+				next(err);
+			}
+
+			project.bugs.add({name: name,
+						description: description,
+						assignedTo: assignedTo,
+					  	priority: priority,
+					  	creator: creator });
+			project.save(function (err, created) {
+				sails.log(err);
+				res.redirect('/project/');
+			});
+		});
+
+	},
+
+	detail: function (req, res) {
+		var id = req.param('id');
+
+		Bug.findOne({id: id}).populate('creator')
+									.populate('belongsTo')
+									.populate('assignedTo')
+									.exec(function (err, found) {
+			sails.log(found);
+		res.view({bug: found});
+		});
 	}
 };
 

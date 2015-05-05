@@ -21,7 +21,6 @@ module.exports = {
     
    creator: {
       model: 'User',
-      required: true
     },
     
     // Bug can be assinged to developer who is developer of project..,
@@ -31,7 +30,6 @@ module.exports = {
     
     belongsTo: {
       model: 'Project',
-      required: true
     },
     
     description: {
