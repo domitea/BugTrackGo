@@ -19,6 +19,7 @@
             <li class="active"><a href="/bug/new/undefined">New bug</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+				 <li><a href="/logout"><b>Log Out</b></a></li>
             <li><a href="/user/manage"><b><%= user.username %></b></a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -52,9 +53,9 @@
 									<option value="<%= my[i].id %>"><%= my[i].name %></option>
 								<% } %>
 									<option disabled="true">Public projects</option>
-								<% for (var i = 0; i < public.length; i++) { %>
+								<% for (var i = 0; i < public.length; i++) { if (public[i].creator !== user.id) { %>
 									<option value="<%= public[i].id %>"><%= public[i].name %></option>
-								<% } %>
+								<% } } %>
                 		</select>
 						<% } %>
               	</div>

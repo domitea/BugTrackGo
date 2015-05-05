@@ -14,7 +14,7 @@ module.exports = {
 	},
 	
 	detail: function (req, res) {
-		Project.findOne({id: req.param('id')}).populate('developers').exec(function (err,found) {
+		Project.findOne({id: req.param('id')}).exec(function (err,found) {
 			if (err) {
 				next(err);
 			}
@@ -43,10 +43,11 @@ module.exports = {
 		// Find all projects where creator is logged user
 		Project.find({creator: userId}).then(),
 		// Find all public projects where creator is NOT logged user
-		Project.find({privacy: "public", creator: { '!': userId }}).then(),
+		Project.find({privacy: "public"}).then(),
 		// Find other projects (= private) where creator is NOT logged user
-		Project.find({privacy: "private", creator: { '!': userId }}).then()
+		Project.find({privacy: "private"}).then()
 		]).spread(function (my, public, other) {
+			sails.log(public);
 			res.view({my: my, public: public , other: other});
 		}).fail(function (why) {
 			res.serverError(why);

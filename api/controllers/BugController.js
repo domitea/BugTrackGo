@@ -15,14 +15,14 @@ module.exports = {
 			// Find all projects where creator is logged user
 			Project.find({creator: userId}).then(),
 			// Find all public projects where creator is NOT logged user
-			Project.find({privacy: "public", creator: { '!': userId }}).then()
+			Project.find({privacy: "public"}).then()
 			]).spread(function (my, public) {
 				res.view({my: my, public: public, project: null});
 			}).fail(function (why) {
 				res.serverError(why);
 			});
 		} else { // pokud znamo id projektu, vyhledame developery projektu
-			Project.findOne({id: req.params.id}).populate('developers').exec(function (err, found) {
+			Project.findOne({id: req.params.id}).exec(function (err, found) {
 				res.view({my: null, public: null, project: found});
 			});
 		}
