@@ -1,0 +1,99 @@
+<!-- Header -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Bug Track Go</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/project/">Projects</a></li>
+            <li class="active"><a href="/bug/">Bugs</a></li>
+            <li><a href="/project/new">New project</a></li>
+            <li><a href="/bug/new/undefined">New bug</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+				 <li><a href="/logout"><b>Log Out</b></a></li>
+            <li><a href="/user/manage"><b><%= user.username %></b></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div class="container-fluid">
+
+	<div class="panel panel-primary">
+ 		<div class="panel-heading">
+	  		Edit bug
+  		</div>
+	 	<div class="panel-body">
+			<form class="form-horizontal" action="/bug/<%= bug.id %>" method="post">
+				<div class="form-group">
+             	<label class="control-label col-sm-2" for="name">Name of bug:</label>
+             	<div class="col-sm-10">
+               	<input type="text" class="form-control" required="" name="name" placeholder="Enter name of bug" value="<%= bug.name %>">
+             	</div>
+				</div>
+				<hr />
+				<div class="form-group">
+             	<label class="control-label col-sm-2" for="assignedTo">Assign to:</label>
+             	<div class="col-sm-10">
+               		<select name="assignedTo" class="form-control" required="">
+        						<% for (var i = 0; i < users.length; i++) { %>
+									<option value="<%= users[i].id %>"><%= users[i].username %></option>
+								<% } %>
+                		</select>
+              	</div>
+				</div>
+				<hr />
+				<div class="form-group">
+             	<label class="control-label col-sm-2" for="description">Description of bug:</label>
+             	<div class="col-sm-10">
+						<textarea rows="10" class="form-control" name="description" placeholder="Write some essay about your epic bug..." required="" ><%= bug.description %></textarea>
+             	</div>
+				</div>
+				<hr />
+				<div class="form-group">
+             	<label class="control-label col-sm-2" for="priority">Priority of bug:</label>
+             	<div class="col-sm-10">
+						<select name="priority" class="form-control" required="">
+							<% if (bug.priority === 'normal') { %>
+								<option value="normal" selected="true">Normal</option>
+							<% } else { %>
+								<option value="normal">Normal</option>
+							<% } %>
+							<% if (bug.priority === 'low') { %>
+								<option value="low" selected="true">Low</option>
+							<% } else { %>
+								<option value="low">Low</option>
+							<% } %>
+							<% if (bug.priority === 'high') { %>
+								<option value="high" selected="true">High</option>
+							<% } else { %>
+								<option value="high">High</option>
+							<% } %>
+							<% if (bug.priority === 'none') { %>
+								<option value="none" selected="true">None</option>
+							<% } else { %>
+								<option value="none">None</option>
+							<% } %>
+						</select>
+             	</div>
+				</div>
+				<hr />
+				<div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Submit</button>
+            </div>
+          </div>
+			</form>
+		</div>
+ 	</div>
+
+</div>

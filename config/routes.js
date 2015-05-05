@@ -72,7 +72,7 @@ module.exports.routes = {
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',
 	'get /bug/:id' : 'BugController.detail',
-	'post /bug/:id' : 'BugController.detail',
+	'post /bug/:id' : 'BugController.edit',
 	'get /bug/solved/:id' : 'BugController.solved',
 	'get /bug/edit/:id' : 'BugController.editView',
 	'get /bug/remove/:id' : 'BugController.remove',

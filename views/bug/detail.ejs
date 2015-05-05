@@ -51,11 +51,11 @@
    	</table>
 	 	</div>
 		<div class="panel-footer" >
-			<% if (bug.assignTo == null) { %>
+			<% if (bug.assignedTo == null) { %>
 			This bug is still not assigned to developer!
+			<br />
 			<% } %>
 			<% if (bug.creator.id === user.id) { %>
-				<hr />
 				<% if (!bug.solved) { %>
 					<a href="/bug/solved/<%= bug.id %>"><button type="submit" class="btn btn-success">Mark bug as solved</button></a>
 				<% } %>

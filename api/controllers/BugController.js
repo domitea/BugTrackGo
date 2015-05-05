@@ -33,7 +33,6 @@ module.exports = {
 		var description = req.param('description');
 		var belongsTo = req.param('belongsTo');
 		var priority = req.param('priority');
-		var assignedTo = req.param('assignedTo');
 		var creator = res.locals.user;
 
 		Project.findOne({id: belongsTo}).exec(function (err, project) {
@@ -44,7 +43,6 @@ module.exports = {
 
 			project.bugs.add({name: name,
 						description: description,
-						assignedTo: assignedTo,
 					  	priority: priority,
 					  	creator: creator });
 			project.save(function (err, created) {
@@ -59,11 +57,9 @@ module.exports = {
 		var id = req.param('id');
 
 		Q.all([
-			Bug.findOne({id: id}).populate('creator').populate('belongsTo').then(),
+			Bug.findOne({id: id}).populate('creator').populate('belongsTo').populate('assignedTo').then(),
 			Comment.find({belongsTo: id}).then(),
 		]).spread(function (bug, comments) {
-			sails.log(bug);
-			sails.log(comments);
 			res.view({bug: bug, comments: comments});
 		}).fail(function (why) {
 			res.serverError(why);
@@ -78,6 +74,36 @@ module.exports = {
 
 	solved: function(req, res) {
 		Bug.merge(req.param('id'), {solved: true}, function (err, changed) {
+			res.redirect('/bug/' + changed.id);
+		});
+	},
+
+	editView: function(req, res) {
+		Q.all([
+			Bug.findOne({id: req.param('id')}).populate('belongsTo').then(),
+			User.find().skip(1).then(),
+		]).spread(function (bug, users) {
+			if (bug.belongsTo.privacy === 'private') {
+				res.view({bug: bug, users: res.locals.user});
+			} else {
+				res.view({bug: bug, users: users});
+			}
+		}).fail(function (err) {
+			res.serverError(err);
+		});
+	},
+
+	edit: function(req, res) {
+		sails.log("ssadsa");
+
+		var name = req.param('name');
+		var description = req.param('description');
+		var priority = req.param('priority');
+		var assignedTo = req.param('assignedTo');
+
+		sails.log(assignedTo);
+
+		Bug.merge(req.param('id'), {name: name, description: description, priority: priority, assignedTo: assignedTo}, function (err, changed) {
 			res.redirect('/bug/' + changed.id);
 		});
 	},
