@@ -1,3 +1,3 @@
 # BugTrackGo
 
-a [Sails](http://sailsjs.org) application
+a simple bug tracking system for small teams

@@ -47,8 +47,20 @@
     			<% for(var i = 0; i < bugs.length; i++) { %>
 					<tr>
 						<td><%= bugs[i].name %></td>
-						<td><%= bugs[i].solved %></td>
-						<td><%= bugs[i].priority %></td>
+						<% if (bugs[i].solved == true) { %>
+							<td><span class="btn btn-success disabled">True</span></td>
+						<% } else { %>
+							<td><span class="btn btn-danger disabled">False</span></td>
+						<% } %>
+						<% if (bugs[i].priority === 'none') { %>
+									<td><span class="btn btn-default disabled">None</span></td>
+						<% } else if (bugs[i].priority === 'low') { %>
+									<td><span class="btn btn-primary disabled">Low</span></td>
+						<% } else if (bugs[i].priority === 'normal') { %>
+									<td><span class="btn btn-warning disabled">Normal</span></td>
+						<% } else { %>
+									<td><span class="btn btn-danger disabled">High</span></td>
+						<% } %>
 						<td><a href="/bug/<%= bugs[i].id %>"><span class="btn btn-default">Details >></span></a></td>
 					</tr>
 				<% } %>
