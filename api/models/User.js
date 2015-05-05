@@ -28,9 +28,9 @@ var User = {
       via: 'user' 
     },
     
-    /*admin: {
+    admin: {
       type: 'boolean'
-    },*/
+    },
     
     isDeveloperIn: {
       collection: 'Project',

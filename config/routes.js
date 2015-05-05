@@ -71,4 +71,6 @@ module.exports.routes = {
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',
 	'get /bug/:id' : 'BugController.detail',
+
+	'post /comment' : 'CommentController.new',
 };

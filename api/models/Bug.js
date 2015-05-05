@@ -46,6 +46,11 @@ module.exports = {
 	 solved: {
 		 type: 'boolean',
 		 defaultsTo: 'false'
+	 },
+
+	 comments: {
+		 collection: 'Comment',
+		 via: 'belongsTo'
 	 }
   }
 };

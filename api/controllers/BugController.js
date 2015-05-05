@@ -9,7 +9,7 @@ var Q = require('q');
 module.exports = {
 	new: function (req, res) {
 		var userId = res.locals.user.id;
-		if (req.param('id') === 'undefined') // pokud neni zname id projectu (kliknuti na odkaz z hlavicky)
+		if (req.param('id') === 'undefined') // pokud neni zname id projektu (kliknuti na odkaz z hlavicky)
 		{
 			Q.all([
 			// Find all projects where creator is logged user
@@ -49,7 +49,7 @@ module.exports = {
 					  	creator: creator });
 			project.save(function (err, created) {
 				sails.log(err);
-				res.redirect('/project/');
+				res.redirect("/project/");
 			});
 		});
 
@@ -58,13 +58,16 @@ module.exports = {
 	detail: function (req, res) {
 		var id = req.param('id');
 
-		Bug.findOne({id: id}).populate('creator')
-									.populate('belongsTo')
-									.populate('assignedTo')
-									.exec(function (err, found) {
-			sails.log(found);
-		res.view({bug: found});
-		});
+		Q.all([
+			Bug.findOne({id: id}).populate('creator').populate('belongsTo').then(),
+			Comment.find({belongsTo: id}).then(),
+		]).spread(function (bug, comments) {
+			sails.log(bug);
+			sails.log(comments);
+			res.view({bug: bug, comments: comments});
+		}).fail(function (why) {
+			res.serverError(why);
+		})
 	}
 };
 

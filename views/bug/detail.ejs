@@ -40,7 +40,7 @@
 					<td><b>Description:</b></td><td colspan="3"><%= bug.description %></td>
 				</tr>
 				<tr>
-					<% if (typeof bug.assignedTo !== 'undefined') { %>
+					<% if (bug.assignedTo != null) { %>
 					<td><b>Assigned:</b></td><td><%= bug.assignedTo.username %></td>
 					<% } else { %>
 					<td><b>Assigned:</b></td><td>Not assigned</td>
@@ -51,6 +51,37 @@
 	 	</div>
 		<div class="panel-footer" >
 			This bug is still not assigned to developer! You can <u>assign</u> them or marked as <u>solved</u>
+		</div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Comments</b>
+		</div>
+		<div class="panel-body">
+			<% if (comments.length > 0) { %>
+				<% for (var i = 0; i < comments.length; i++) { %>
+					<div class="panel panel-primary">
+						<div class="panel-body">
+							<%= comments[i].text %>
+						</div>
+						<div class="panel-footer">
+							<%= comments[i].creatorName %>
+						</div>
+					</div>
+			<% } %>
+			<% } else { %>
+			<div class="alert alert-success" role="alert"><b>There are no comments to show!</b></div>
+			<% } %>
+	 	</div>
+		<div class="panel-footer" >
+			<form class="form-vertical" action="/comment" method="post">
+				<input type="hidden" name="creator" value="<%= JSON.stringify(user) %>">
+				<input type="hidden" name="belongsTo" value="<%= JSON.stringify(bug) %>">
+				<textarea rows="3" name="text" required="" class="form-control"></textarea>
+				<hr />
+				<button type="submit" class="btn btn-default">Send</button>
+			</form>
 		</div>
 	</div>
 
