@@ -56,7 +56,7 @@
 							<% } %>
 				</tr>
 
-    		<% if (!project.creator.id === user.id) { %>
+    		<% if (project.creator.id !== user.id) { %>
 				<tr>
 					<td><b>Creator:</b></td>
 					<td><%= project.creator.username %></td>
@@ -66,7 +66,12 @@
 
 		<%= JSON.stringify(project) %>
 		</div>
-
+		<div class="panel-footer">
+			<% if (project.creator.id === user.id) { %>
+			<a href="/project/edit/<%= project.id %>"><button type="submit" class="btn btn-warning">Edit project</button></a>
+			<a href="/project/remove/<%= project.id %>"><button type="submit" class="btn btn-danger">Remove project</button></a>
+   		<% } %>
+		</div>
 	</div>
 
 	<div class="panel panel-primary">

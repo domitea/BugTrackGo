@@ -68,6 +68,18 @@ module.exports = {
 		}).fail(function (why) {
 			res.serverError(why);
 		})
-	}
+	},
+
+	remove: function(req, res) {
+		Bug.destroy({id: req.param('id')}).exec(function (err) {
+			res.redirect('/home');
+		});
+	},
+
+	solved: function(req, res) {
+		Bug.merge(req.param('id'), {solved: true}, function (err, changed) {
+			res.redirect('/bug/' + changed.id);
+		});
+	},
 };
 

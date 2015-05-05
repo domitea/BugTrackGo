@@ -67,10 +67,16 @@ module.exports.routes = {
   'get /project/' : 'ProjectController.list',
   'post /project/' : 'ProjectController.newProject',
   'post /project/:id' : 'ProjectController.edit',
+	'post /project/remove/:id' : 'ProjectController.remove',
 
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',
 	'get /bug/:id' : 'BugController.detail',
+	'post /bug/:id' : 'BugController.detail',
+	'get /bug/solved/:id' : 'BugController.solved',
+	'get /bug/edit/:id' : 'BugController.editView',
+	'get /bug/remove/:id' : 'BugController.remove',
+
 
 	'post /comment' : 'CommentController.new',
 };

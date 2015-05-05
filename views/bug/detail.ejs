@@ -51,9 +51,19 @@
    	</table>
 	 	</div>
 		<div class="panel-footer" >
-			This bug is still not assigned to developer! You can <u>assign</u> them or marked as <u>solved</u>
+			<% if (bug.assignTo == null) { %>
+			This bug is still not assigned to developer!
+			<% } %>
+			<% if (bug.creator.id === user.id) { %>
+				<hr />
+				<% if (!bug.solved) { %>
+					<a href="/bug/solved/<%= bug.id %>"><button type="submit" class="btn btn-success">Mark bug as solved</button></a>
+				<% } %>
+				<a href="/bug/edit/<%= bug.id %>"><button type="submit" class="btn btn-warning">Edit bug</button></a>
+				<a href="/bug/remove/<%= bug.id %>"><button type="submit" class="btn btn-danger">Remove bug</button></a>
+				</div>
+   		<% } %>
 		</div>
-	</div>
 
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -67,7 +77,13 @@
 							<%= comments[i].text %>
 						</div>
 						<div class="panel-footer">
+						<% if (comments[i].creator === user.id) { %>
+						<form class="form-vertical" action="/comment/remove/<%= project.id %>" method="post">
+							<button type="submit" class="btn btn-default">Remove comment</button>
+						</form>
+   					<% } else { %>
 							<%= comments[i].creatorName %>
+						<% } %>
 						</div>
 					</div>
 			<% } %>

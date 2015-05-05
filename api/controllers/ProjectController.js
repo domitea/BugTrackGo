@@ -47,7 +47,6 @@ module.exports = {
 		// Find other projects (= private) where creator is NOT logged user
 		Project.find({privacy: "private"}).then()
 		]).spread(function (my, public, other) {
-			sails.log(public);
 			res.view({my: my, public: public , other: other});
 		}).fail(function (why) {
 			res.serverError(why);
@@ -77,6 +76,12 @@ module.exports = {
 		});
 		
 		res.redirect('/project/');
+	},
+
+	remove: function(req, res) {
+		Project.destroy({id: req.param('id')}).populate('bugs').exec(function (err) {
+			res.redirect('/home');
+		});
 	}
 };
 
