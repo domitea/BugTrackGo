@@ -27,6 +27,107 @@
 
 <div class="container-fluid">
 
-	<h1> Welcome back <%= user.username %>!</h1>
+	<div class="page-header">
+   	<h1>Welcome back <%= user.username %>!</h1>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Bugs to solve and created by you</b>
+		</div>
+		<div class="panel-body">
+			<% if (bugs.length > 0) { %>
+
+			<table class="table table-striped table-hover">
+
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Solved</th>
+						<th>Priority</th>
+					</tr>
+				</thead>
+				<tbody>
+    			<% for(var i = 0; i < bugs.length; i++) { %>
+					<tr>
+						<td><%= bugs[i].name %></td>
+						<% if (bugs[i].solved == true) { %>
+							<td><span class="btn btn-success disabled">True</span></td>
+						<% } else { %>
+							<td><span class="btn btn-danger disabled">False</span></td>
+						<% } %>
+						<% if (bugs[i].priority === 'none') { %>
+									<td><span class="btn btn-default disabled">None</span></td>
+						<% } else if (bugs[i].priority === 'low') { %>
+									<td><span class="btn btn-primary disabled">Low</span></td>
+						<% } else if (bugs[i].priority === 'normal') { %>
+									<td><span class="btn btn-warning disabled">Normal</span></td>
+						<% } else { %>
+									<td><span class="btn btn-danger disabled">High</span></td>
+						<% } %>
+						<td><a href="/bug/<%= bugs[i].id %>"><span class="btn btn-default">Details >></span></a></td>
+					</tr>
+				<% } %>
+				</tbody>
+   		</table>
+
+			<% } else { %>
+
+			<div class="alert alert-success" role="alert"><b>There are no bugs to solve!</b></div>
+
+   		<% } %>
+		</div>
+  		<div class="panel-footer">
+  			<td><span class="btn btn-normal"><a href="/bug/new/">Add bug</a></span>
+    	</div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<b>Bugs assigned to you</b>
+		</div>
+		<div class="panel-body">
+			<% if (assignedBugs.length > 0) { %>
+
+			<table class="table table-striped table-hover">
+
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Solved</th>
+						<th>Priority</th>
+					</tr>
+				</thead>
+				<tbody>
+    			<% for(var i = 0; i < assignedBugs.length; i++) { %>
+					<tr>
+						<td><%= assignedBugs[i].name %></td>
+						<% if (assignedBugs[i].solved == true) { %>
+							<td><span class="btn btn-success disabled">True</span></td>
+						<% } else { %>
+							<td><span class="btn btn-danger disabled">False</span></td>
+						<% } %>
+						<% if (assignedBugs[i].priority === 'none') { %>
+									<td><span class="btn btn-default disabled">None</span></td>
+						<% } else if (assignedBugs[i].priority === 'low') { %>
+									<td><span class="btn btn-primary disabled">Low</span></td>
+						<% } else if (assignedBugs[i].priority === 'normal') { %>
+									<td><span class="btn btn-warning disabled">Normal</span></td>
+						<% } else { %>
+									<td><span class="btn btn-danger disabled">High</span></td>
+						<% } %>
+						<td><a href="/bug/<%= assignedBugs[i].id %>"><span class="btn btn-default">Details >></span></a></td>
+					</tr>
+				<% } %>
+				</tbody>
+   		</table>
+
+			<% } else { %>
+
+			<div class="alert alert-success" role="alert"><b>There are no bugs assigned to you!</b></div>
+
+   		<% } %>
+		</div>
+	</div>
 		
 </div>
