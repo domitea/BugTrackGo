@@ -90,7 +90,7 @@ module.exports = {
 			User.find().skip(1).then(),
 		]).spread(function (bug, users) {
 			if (bug.belongsTo.privacy === 'private') {
-				res.view({bug: bug, users: res.locals.user});
+				res.view({bug: bug, users: [res.locals.user]});
 			} else {
 				res.view({bug: bug, users: users});
 			}

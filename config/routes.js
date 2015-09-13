@@ -60,7 +60,8 @@ module.exports.routes = {
   
   
   'get /home':'UserController.home',
-  
+
+	// project  
   'get /project/new' : 'ProjectController.new',
   'get /project/:id' : 'ProjectController.detail',
   'get /project/' : 'ProjectController.list',
@@ -69,6 +70,7 @@ module.exports.routes = {
   'post /project/:id' : 'ProjectController.edit',
 	'get /project/remove/:id' : 'ProjectController.remove',
 
+	// bug stuff
 	'get /bug/new/:id' : 'BugController.new',
 	'post /bug/' : 'BugController.newBug',
 	'get /bug/' : 'BugController.list',
@@ -77,6 +79,23 @@ module.exports.routes = {
 	'get /bug/solved/:id' : 'BugController.solved',
 	'get /bug/edit/:id' : 'BugController.editView',
 	'get /bug/remove/:id' : 'BugController.remove',
+
+	// task stuff
+	'get /task/new/:id' : 'TaskController.new',
+	'post /task/' : 'TaskController.newTask',
+	'get /task/' : 'TaskController.list',
+	'get /task/:id' : 'TaskController.detail',
+	'post /task/:id' : 'TaskController.edit',
+	'get /task/toBill/:id' : 'TaskController.toBill',
+	'get /task/edit/:id' : 'TaskController.editView',
+	'get /task/remove/:id' : 'TaskController.remove',
+
+	// spendTime stuff
+	'get /spendTime/new/:id' : 'SpendTimeController.new',
+	'post /spendTime/' : 'SpendTimeController.newSpendTime',
+	'get /spendTime/' : 'SpendTimeController.list',
+	'get /spendTime/:id' : 'SpendTimeController.projectList',
+	'get /spentTime/remove/:id' : 'SpendTimeController.remove',
 
 
 	'post /comment' : 'CommentController.new',

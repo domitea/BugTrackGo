@@ -23,10 +23,12 @@ module.exports = {
 			Q.all([
 				User.findOne({id: project.creator}).then(),
 				Bug.find({belongsTo: project.id}).then(),
-			]).spread(function (user, bugs) {
+				Task.find({belongsToProject: project.id}).then(),
+			]).spread(function (user, bugs, tasks) {
 
 				project.creator = user;
 				project.bugs = bugs;
+				project.tasks = tasks;
 
 				res.view({project: project});
 			}).fail(function (why) {
@@ -83,7 +85,7 @@ module.exports = {
 			sails.log("Created project" + created.name);
 		});
 		
-		res.redirect('/project/');
+		res.redirect('/home/');
 	},
 
 	remove: function(req, res) {

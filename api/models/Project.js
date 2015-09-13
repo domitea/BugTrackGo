@@ -50,6 +50,11 @@ module.exports = {
       collection: 'Bug',
       via: 'belongsTo'
     },
+
+	tasks: {
+		collection: 'Task',
+		via: 'belongsToProject'
+	},
   }
 };
 

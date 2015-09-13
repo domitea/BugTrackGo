@@ -27,6 +27,10 @@ module.exports = {
     assignedTo: {
       model: 'User'
     },
+	
+	belongsToTask: {
+		model: 'Task'	
+	},
     
     belongsTo: {
       model: 'Project',
