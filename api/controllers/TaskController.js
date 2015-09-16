@@ -75,7 +75,14 @@ module.exports = {
 	},
 
 	remove: function(req, res) {
-		
+		Task.destroy({id: req.param('id')}).populate('timeSpend').exec(function (err) {
+			if (err)
+			{
+				res.serverError(err);
+			}
+
+			res.redirect('/home');
+		});
 	},
 
 	toBill: function(req, res) {
@@ -85,15 +92,33 @@ module.exports = {
 	},
 
 	editView: function(req, res) {
-		
+		Q.all([
+			Task.findOne({id: req.param('id')}).then(),
+			User.find().then(),
+		]).spread(function (task, users) {
+			res.view({task: task, users: users});
+		}).fail(function (err) {
+			res.serverError(err);
+		});
 	},
 
 	edit: function(req, res) {
+		var name = req.param('name');
+		var description = req.param('description');
 
+		Task.merge(req.param('id'), {name: name, description: description}, function (err, changed) {
+			res.redirect('/task/' + changed.id);
+		});
 	},
 
 	list: function(req, res) {
-		
+		Q.all([
+			Task.find({creator: res.locals.user.id}).then()
+		]).spread(function (myTasks) {
+			res.view({tasks: myTasks})
+		}).fail(function (why) {
+			res.serverError(why);
+		});
 	},
 };
 

@@ -87,7 +87,7 @@ module.exports = {
 	editView: function(req, res) {
 		Q.all([
 			Bug.findOne({id: req.param('id')}).populate('belongsTo').then(),
-			User.find().skip(1).then(),
+			User.find().then(),
 		]).spread(function (bug, users) {
 			if (bug.belongsTo.privacy === 'private') {
 				res.view({bug: bug, users: [res.locals.user]});

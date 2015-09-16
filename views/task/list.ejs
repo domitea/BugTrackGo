@@ -29,62 +29,49 @@
 
 <div class="container-fluid">
 	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<b>Information</b>
-		</div>
-  		<div class="panel-body">
-
-			<table class="table table-striped table-hover">
-				<tr>
-					<td><b>Name:</b></td><td><%= task.name %></td>
-					<td><b>Description:</b></td><td><%= task.description %></td>
-				</tr>
-
-    		<% if (project.creator.id !== user.id) { %>
-				<tr>
-					<td><b>Creator:</b></td>
-					<td><%= project.creator.username %></td>
-				</tr>
-   		<% } %>
-   	</table>
-		</div>
-		<div class="panel-footer">
-			<% if (task.creator.id === user.id) { %>
-			<a href="/task/edit/<%= task.id %>"><button type="submit" class="btn btn-warning">Edit task</button></a>
-			<a href="/task/remove/<%= task.id %>"><button type="submit" class="btn btn-danger">Remove task</button></a>
-   		<% } %>
-		</div>
-	</div>
-
-	<!--<div class="panel panel-primary">
-		<div class="panel-heading">
-			<b>Info about project</b>
-		</div>
-		<div class="panel-body">
-			<div class="alert alert-alert" role="alert"><b>There are no info about project!</b></div>
-		</div>
-	</div> -->
-	
-	<div class="panel panel-primary">
 			<div class="panel-heading">
-				<b>Time spend</b>
+				<b>Tasks</b>
 			</div>
 			<div class="panel-body">
-			<% if (task.spendTime.length > 0) { %>
-			
-				<div class="alert alert-alert" role="alert"><b>Edit that!</b></div>
+			<% if (tasks.length > 0) { %>
+
+			<table class="table table-striped table-hover">
+
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Created</th>
+						<th>On bill</th>
+					</tr>
+				</thead>
+				<tbody>
+    			<% for(var i = 0; i < tasks.length; i++) { %>
+					<tr>
+						<td><%= tasks[i].name %></td>
+						<td><%= tasks[i].description %></td>
+						<td><%= tasks[i].createdAt %></td>
+						<% if (tasks[i].onBill == true) { %>
+								<td><span class="btn btn-success disabled">True</span></td>
+						<% } else { %>
+								<td><span class="btn btn-danger disabled">False</span></td>
+						<% } %>
+						<td><a href="/task/<%= tasks[i].id %>"><span class="btn btn-default">Details >></span></a></td>
+						<td><a href="/task/toBill/<%= tasks[i].id %>"><span class="btn btn-success">On Bill</span></a></td>
+					</tr>
+				<% } %>
+				</tbody>
+			</table>
 
 			<% } else { %>
 
-			<div class="alert alert-success" role="alert"><b>There are no spended time!</b></div>
+			<div class="alert alert-success" role="alert"><b>There are no tasks!</b></div>
 
    		<% } %>
 		</div>
   		<div class="panel-footer">
-  			<span class="btn btn-normal"><a href="../spendTime/new/<%= task.id %>">Add spended time</a></span>
+  			<span class="btn btn-normal"><a href="../task/new/undefined">Add task</a></span>
     	</div>
 	</div>
 
 </div>
-
-
