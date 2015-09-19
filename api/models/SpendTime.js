@@ -26,6 +26,14 @@ module.exports = {
 		type: 'text',
 		required: true
 	},
+
+	createdAt: {
+		type: 'datetime'
+	},
+
+	creator: {
+	 	model: 'User'
+	},
   }
 };
 
